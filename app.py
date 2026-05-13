@@ -27,6 +27,7 @@ hide_style = """
     iframe[title="Streamlit cloud badge"] {display: none !important;}
     </style>
     """
+
 st.markdown(hide_style, unsafe_allow_html=True)
 # --- 3. 密碼驗證功能 (設定為 yc888) ---
 def check_password():
