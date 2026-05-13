@@ -7,13 +7,16 @@ from weasyprint import HTML
 # --- 1. 頁面基本設定與專業外觀 ---
 st.set_page_config(page_title="御晁工程報價系統", layout="wide")
 
-# --- 2. 隱藏官方選單、頁首頁尾 (保護開發心血) ---
+# --- 2. 隱藏官方選單、頁首頁尾與右下角浮水印 (保護開發心血) ---
 hide_style = """
     <style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stDeployButton {display:none;}
+    /* 👇 隱藏右下角的 Streamlit 浮水印與連結 */
+    div[class^="viewerBadge_container"] {display: none !important;}
+    div[class^="viewerBadge_link"] {display: none !important;}
     </style>
     """
 st.markdown(hide_style, unsafe_allow_html=True)
