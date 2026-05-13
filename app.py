@@ -7,26 +7,30 @@ from weasyprint import HTML
 # --- 1. 頁面基本設定與專業外觀 ---
 st.set_page_config(page_title="御晁工程報價系統", layout="wide")
 
-# --- 2. 隱藏官方選單、頁首頁尾與右下角所有浮水印 (終極隱藏版) ---
+# --- 2. 隱藏官方選單、頁首頁尾與右下角浮水印 (核彈級隱藏) ---
 hide_style = """
     <style>
-    /* 隱藏右上角選單與底部預設文字 */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    /* 隱藏部署按鈕 */
+    /* 1. 隱藏主選單、標頭與頁尾 */
+    #MainMenu {visibility: hidden !important;}
+    header {visibility: hidden !important;}
+    footer {visibility: hidden !important;}
+    
+    /* 2. 隱藏所有部署按鈕與右上角工具列 */
     .stDeployButton {display:none !important;}
-    
-    /* 👇 隱藏舊版文字浮水印 */
-    div[class^="viewerBadge_container"] {display: none !important;}
-    div[class^="viewerBadge_link"] {display: none !important;}
-    
-    /* 👇 隱藏新版「開發者頭像(Creator Badge)」與廣告連結 */
-    [data-testid="stCreatorProfile"] {display: none !important;}
     [data-testid="stAppDeployButton"] {display: none !important;}
-    iframe[title="Streamlit cloud badge"] {display: none !important;}
+    [data-testid="stToolbar"] {display: none !important;}
+    
+    /* 3. 暴力隱藏：所有名字裡帶有 badge 或 Profile 的廣告標籤 */
+    div[class*="viewerBadge"] {display: none !important; opacity: 0 !important;}
+    div[class*="CreatorProfile"] {display: none !important; opacity: 0 !important;}
+    
+    /* 4. 暴力隱藏：針對右下角偷塞的 iframe 廣告框 */
+    iframe[title*="badge"] {display: none !important;}
+    iframe[src*="badge"] {display: none !important;}
     </style>
     """
+st.markdown(hide_style, unsafe_allow_html=True)
+
 
 st.markdown(hide_style, unsafe_allow_html=True)
 # --- 3. 密碼驗證功能 (設定為 yc888) ---
