@@ -7,20 +7,27 @@ from weasyprint import HTML
 # --- 1. 頁面基本設定與專業外觀 ---
 st.set_page_config(page_title="御晁工程報價系統", layout="wide")
 
-# --- 2. 隱藏官方選單、頁首頁尾與右下角浮水印 (保護開發心血) ---
+# --- 2. 隱藏官方選單、頁首頁尾與右下角所有浮水印 (終極隱藏版) ---
 hide_style = """
     <style>
+    /* 隱藏右上角選單與底部預設文字 */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    .stDeployButton {display:none;}
-    /* 👇 隱藏右下角的 Streamlit 浮水印與連結 */
+    /* 隱藏部署按鈕 */
+    .stDeployButton {display:none !important;}
+    
+    /* 👇 隱藏舊版文字浮水印 */
     div[class^="viewerBadge_container"] {display: none !important;}
     div[class^="viewerBadge_link"] {display: none !important;}
+    
+    /* 👇 隱藏新版「開發者頭像(Creator Badge)」與廣告連結 */
+    [data-testid="stCreatorProfile"] {display: none !important;}
+    [data-testid="stAppDeployButton"] {display: none !important;}
+    iframe[title="Streamlit cloud badge"] {display: none !important;}
     </style>
     """
 st.markdown(hide_style, unsafe_allow_html=True)
-
 # --- 3. 密碼驗證功能 (設定為 yc888) ---
 def check_password():
     def password_entered():
